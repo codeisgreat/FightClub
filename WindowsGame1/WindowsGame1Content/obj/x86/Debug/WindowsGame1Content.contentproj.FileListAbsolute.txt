@@ -1,2 +1,0 @@
-c:\users\jonathan\documents\visual studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1Content\obj\x86\Debug\ResolveAssemblyReference.cache
-A:\Projekt\FightClub\WindowsGame1\WindowsGame1Content\obj\x86\Debug\ResolveAssemblyReference.cache
