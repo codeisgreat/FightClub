@@ -11,14 +11,13 @@ using Microsoft.Xna.Framework.GamerServices;
 namespace WindowsGame1
 {
 
-    enum SpriteID { Attack, Defense, Wait }
+   public enum SpriteID { Attack, Defense, Wait }
 
     public class Player
     {
-        //Testar ännu lite skit
-        //GIT COMMENT SKIT FÖR ATT TESTA OSV!
+        
         float speed;
-        int stance;
+        SpriteID stance;
         int count;
         // Position 
         Vector2 position;
@@ -39,7 +38,7 @@ namespace WindowsGame1
             this.key = key;
             this.direction = direction;
             speed = 0.5f;
-            stance = (int) SpriteID.Wait;
+            stance = SpriteID.Wait;
             currentTexture = new Rectangle(0, 0, 70, 114);
             boundings = new Rectangle((int) position.X, (int) position.Y, currentTexture.Width, currentTexture.Height);
             
@@ -57,11 +56,11 @@ namespace WindowsGame1
 
             switch (stance)
             {
-                case ((int)SpriteID.Attack):
+                case (SpriteID.Attack):
                     AttackStance(); break;
-                case ((int)SpriteID.Defense):
+                case (SpriteID.Defense):
                     DefenseStance(); break;
-                case ((int)SpriteID.Wait):
+                case (SpriteID.Wait):
                     WaitStance(); break;
             }
 
@@ -75,7 +74,7 @@ namespace WindowsGame1
         private void AttackStance()
         {
             position.X += direction * 20;
-            stance = (int)SpriteID.Wait;
+            stance = SpriteID.Wait;
         }
 
         private void DefenseStance()
@@ -83,7 +82,7 @@ namespace WindowsGame1
             if (keyboard.IsKeyDown(key))
                 position.X -= (direction * speed);
             else
-                stance = (int)SpriteID.Wait;
+                stance = SpriteID.Wait;
         }
 
         private void WaitStance()
@@ -93,13 +92,13 @@ namespace WindowsGame1
                 count++;
                 if (count > 5)
                 {
-                    stance = (int)SpriteID.Defense;
+                    stance = SpriteID.Defense;
                     count = 0;
                 }
             }
             else if (count > 1)
             {
-                stance = (int) SpriteID.Attack;
+                stance = SpriteID.Attack;
                 count = 0;
             }
             else
@@ -118,7 +117,7 @@ namespace WindowsGame1
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            currentTexture.X = stance * currentTexture.Width;
+            currentTexture.X = (int)stance * currentTexture.Width;
             spriteBatch.Draw(texture, position, currentTexture, Color.White);     
         }
 
@@ -128,5 +127,14 @@ namespace WindowsGame1
             return boundings;
         }
 
+        public void GetTextureData(Color[] destinationArray) 
+        {
+            texture.GetData(0, currentTexture, destinationArray, currentTexture.X, destinationArray.Length);
+        
+        }
+        public SpriteID GetCurrentStance()
+        {
+            return stance;
+        }
     }
 }
