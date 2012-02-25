@@ -15,7 +15,7 @@ namespace WindowsGame1
 
     public class Player
     {
-
+        //GIT COMMENT SKIT FÖR ATT TESTA OSV!
         float speed;
         int stance;
         int count;
