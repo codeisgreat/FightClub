@@ -23,6 +23,7 @@ namespace WindowsGame1
         Player player1;
         Player player2;
         //Nu har vi två spelare, varför kan vi inte ha tre?
+        //lite skit här
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
