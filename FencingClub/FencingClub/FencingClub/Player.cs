@@ -15,6 +15,7 @@ namespace WindowsGame1
 
     public class Player
     {
+        //Testar ännu lite skit
         //GIT COMMENT SKIT FÖR ATT TESTA OSV!
         float speed;
         int stance;
