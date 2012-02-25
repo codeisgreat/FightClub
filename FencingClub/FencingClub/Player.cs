@@ -27,7 +27,7 @@ namespace WindowsGame1
         // Textures 
         Texture2D texture;
         Rectangle currentTexture;
-        Rectangle boundings;
+        public Rectangle boundings;
         
         // Input
         KeyboardState keyboard;
@@ -58,11 +58,11 @@ namespace WindowsGame1
             switch (stance)
             {
                 case ((int)SpriteID.Attack):
-                    Attacking(); break;
+                    AttackStance(); break;
                 case ((int)SpriteID.Defense):
-                    Defending(); break;
+                    DefenseStance(); break;
                 case ((int)SpriteID.Wait):
-                    Waiting(); break;
+                    WaitStance(); break;
             }
 
             position.X = MathHelper.Clamp(position.X, 0, window.ClientBounds.Width - currentTexture.Width);
@@ -71,13 +71,14 @@ namespace WindowsGame1
             
         }
 
-        private void Attacking()
+        
+        private void AttackStance()
         {
-            position.X += 20;
+            position.X += direction * 20;
             stance = (int)SpriteID.Wait;
         }
 
-        private void Defending()
+        private void DefenseStance()
         {
             if (keyboard.IsKeyDown(key))
                 position.X -= (direction * speed);
@@ -85,7 +86,7 @@ namespace WindowsGame1
                 stance = (int)SpriteID.Wait;
         }
 
-        private void Waiting()
+        private void WaitStance()
         {
             if (keyboard.IsKeyDown(key))
             {
@@ -109,26 +110,23 @@ namespace WindowsGame1
         }
 
 
-        private void updatePosition(float difference)
+        public void updatePosition(float newX)
         {
-            position.X += difference;
-
-        
+            position.X += direction * newX;
         }
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
             currentTexture.X = stance * currentTexture.Width;
-            spriteBatch.Draw(texture, position, currentTexture, Color.White);
-            
+            spriteBatch.Draw(texture, position, currentTexture, Color.White);     
         }
 
 
-        public Boolean IsDefending()
+        public Rectangle GetBoundings()
         {
-            return true;
+            return boundings;
         }
-        
+
     }
 }

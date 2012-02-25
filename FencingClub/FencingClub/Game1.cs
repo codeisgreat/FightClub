@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -20,6 +21,7 @@ namespace WindowsGame1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player1;
+        Player player2;
 
         public Game1()
         {
@@ -37,6 +39,7 @@ namespace WindowsGame1
         {
             // TODO: Add your initialization logic here
             player1 = new Player(new Vector2(Window.ClientBounds.Width/4, Window.ClientBounds.Height - 114), Keys.D, 1);
+            player2 = new Player(new Vector2(Window.ClientBounds.Width * 3 / 4, Window.ClientBounds.Height - 114), Keys.S, -1);
             base.Initialize();
         }
 
@@ -49,6 +52,7 @@ namespace WindowsGame1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player1.LoadContent(this.Content, "test");
+            player2.LoadContent(this.Content, "test");
             // TODO: use this.Content to load your game content here
         }
 
@@ -75,6 +79,8 @@ namespace WindowsGame1
             // TODO: Add your update logic here
 
             player1.Update(Window);
+            player2.Update(Window);
+            CheckForCollision();
 
             base.Update(gameTime);
         }
@@ -91,10 +97,26 @@ namespace WindowsGame1
 
             spriteBatch.Begin();
             player1.Draw(spriteBatch);
+            player2.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
             
         }
+
+        private void CheckForCollision()
+        {
+            Rectangle box1 = player1.boundings;
+            Rectangle box2 = player2.boundings;
+            if (box1.Intersects(box2))
+            {
+                int left = Math.Max(box1.Left, box2.Left);
+                int right = Math.Min(box1.Right, box2.Right);
+                player1.updatePosition(left - right);
+                player2.updatePosition(left - right);
+            }      
+        }
+
+
     }
 }
