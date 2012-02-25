@@ -22,7 +22,7 @@ namespace WindowsGame1
         SpriteBatch spriteBatch;
         Player player1;
         Player player2;
-
+        //Nu har vi två spelare
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
