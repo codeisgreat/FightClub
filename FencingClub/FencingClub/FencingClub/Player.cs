@@ -15,7 +15,7 @@ namespace WindowsGame1
 
     public class Player
     {
-
+        String name = "korv";
         float speed;
         int stance;
         int count;
