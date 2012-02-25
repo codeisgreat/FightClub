@@ -109,6 +109,7 @@ namespace WindowsGame1
         {
             Rectangle box1 = player1.boundings;
             Rectangle box2 = player2.boundings;
+            // Om boxarna intersectar
             if (box1.Intersects(box2))
             {
                 int left = Math.Max(box1.Left, box2.Left);
