@@ -27,6 +27,7 @@ namespace WindowsGame1
         Texture2D texture;
         Rectangle currentTexture;
         public Rectangle boundings;
+        private Dictionary<SpriteID, Color[]> colorArrayMap;
         
         // Input
         KeyboardState keyboard;
@@ -41,6 +42,7 @@ namespace WindowsGame1
             stance = SpriteID.Wait;
             currentTexture = new Rectangle(0, 0, 70, 114);
             boundings = new Rectangle((int) position.X, (int) position.Y, currentTexture.Width, currentTexture.Height);
+            colorArrayMap = new Dictionary<SpriteID, Color[]>();
             
         }
 
@@ -48,6 +50,17 @@ namespace WindowsGame1
         public void LoadContent(ContentManager cm, String fileName)
         {            
             texture = cm.Load<Texture2D>(fileName);
+            
+            Color[] textureData = new Color[currentTexture.Width * currentTexture.Height];
+            
+            texture.GetData(0, currentTexture, textureData, currentTexture.X* (int)SpriteID.Attack,textureData.Length);
+            colorArrayMap.Add(SpriteID.Attack, textureData);
+            
+            texture.GetData(0, currentTexture, textureData, currentTexture.X * (int)SpriteID.Defense, textureData.Length);
+            colorArrayMap.Add(SpriteID.Defense, textureData);
+            
+            texture.GetData(0, currentTexture, textureData, currentTexture.X * (int)SpriteID.Wait, textureData.Length);
+            colorArrayMap.Add(SpriteID.Wait, textureData);
         }
 
         public void Update(GameWindow window)
@@ -127,11 +140,14 @@ namespace WindowsGame1
             return boundings;
         }
 
-        public void GetTextureData(Color[] destinationArray) 
+        public Color[] GetCurrentSpriteData()
         {
-            texture.GetData(0, currentTexture, destinationArray, currentTexture.X, destinationArray.Length);
-        
+            Color[] colorArray;
+            colorArrayMap.TryGetValue(stance,out colorArray);
+            return colorArray;
+            
         }
+        
         public SpriteID GetCurrentStance()
         {
             return stance;
