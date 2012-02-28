@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\bin\x86\Debug\Content\test.xnb</Output>
-      <Time>2012-02-25T13:04:21.7768768+01:00</Time>
+      <Output>A:\Projekt\FightClub\FencingClub\FencingClub\bin\x86\Debug\Content\test.xnb</Output>
+      <Time>2012-02-24T21:10:34.3868591+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -16,10 +16,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClubContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClubContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>A:\Projekt\FightClub\FencingClub\FencingClubContent\</RootDirectory>
+      <LoggerRootDirectory>A:\Projekt\FightClub\FencingClub\FencingClub\</LoggerRootDirectory>
+      <IntermediateDirectory>A:\Projekt\FightClub\FencingClub\FencingClubContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>A:\Projekt\FightClub\FencingClub\FencingClub\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -48,7 +48,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-02-18T18:19:08.8521902+01:00</Value>
+        <Value>2012-02-24T16:41:00.6786894+01:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

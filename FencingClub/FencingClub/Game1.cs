@@ -151,8 +151,8 @@ namespace WindowsGame1
 
                                     if (p1Stance == SpriteID.Wait && p2Stance == SpriteID.Wait)
                                     {
-                                        player1.updatePosition(left - right);
-                                        player2.updatePosition(left - right);
+                                        player1.resetToPreviousPosition();
+                                        player2.resetToPreviousPosition();
                                     }
                                     if (p1Stance == SpriteID.Attack && p2Stance == SpriteID.Wait)
                                     {

@@ -21,13 +21,16 @@ namespace WindowsGame1
         int count;
         // Position 
         Vector2 position;
+        Vector2 prevPosition;
         int direction;
+        
 
         // Textures 
         Texture2D texture;
         Rectangle currentTexture;
         public Rectangle boundings;
         private Dictionary<SpriteID, Color[]> colorArrayMap;
+
         
         // Input
         KeyboardState keyboard;
@@ -36,6 +39,7 @@ namespace WindowsGame1
         public Player(Vector2 position, Keys key, int direction)
         {
             this.position = position;
+            prevPosition = position;
             this.key = key;
             this.direction = direction;
             speed = 0.5f;
@@ -66,6 +70,7 @@ namespace WindowsGame1
         public void Update(GameWindow window)
         {
             keyboard = Keyboard.GetState();
+            prevPosition = position;
 
             switch (stance)
             {
@@ -125,6 +130,11 @@ namespace WindowsGame1
         public void updatePosition(float newX)
         {
             position.X += direction * newX;
+        }
+
+        public void resetToPreviousPosition()
+        {
+            position = prevPosition;
         }
 
 
