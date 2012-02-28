@@ -12,3 +12,10 @@ A:\Projekt\FightClub\FencingClub\FencingClub\obj\x86\Debug\ResolveAssemblyRefere
 A:\Projekt\FightClub\FencingClub\FencingClub\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 A:\Projekt\FightClub\FencingClub\FencingClub\obj\x86\Debug\FencingClub.exe
 A:\Projekt\FightClub\FencingClub\FencingClub\obj\x86\Debug\FencingClub.pdb
+C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\obj\x86\Debug\FencingClub.exe
+C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\obj\x86\Debug\FencingClub.pdb
+C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\bin\x86\Debug\Content\test.xnb
+C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\bin\x86\Debug\FencingClub.exe
+C:\Users\Lupp4\Desktop\Programmering\XNA\FightClub\FencingClub\FencingClub\bin\x86\Debug\FencingClub.pdb

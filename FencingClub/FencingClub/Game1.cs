@@ -22,6 +22,9 @@ namespace WindowsGame1
         SpriteBatch spriteBatch;
         Player player1;
         Player player2;
+
+        Color[] player1TextureData;
+        Color[] player2TextureData;
         //Nu har vi två spelare, varför kan vi inte ha tre?
         //lite skit här
         public Game1()
@@ -54,6 +57,13 @@ namespace WindowsGame1
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player1.LoadContent(this.Content, "test");
             player2.LoadContent(this.Content, "test");
+
+            player1TextureData = new Color[player1.GetBoundings().Width * player1.GetBoundings().Height];
+           // player1TextureData = player1.GetTextureData();
+            player2TextureData = new Color[player2.GetBoundings().Width * player2.GetBoundings().Height];
+           // player2TextureData = player2.GetTextureData();
+
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -112,13 +122,70 @@ namespace WindowsGame1
             // Om boxarna intersectar så blir det KAOS
             if (box1.Intersects(box2))
             {
+                 player1TextureData = player1.GetCurrentSpriteData();
+                 player2TextureData = player2.GetCurrentSpriteData();
+                //player1.GetTextureData(player1TextureData);
+               // player2.GetTextureData(player2TextureData);
+                
+                // Create the intersecting rectangle.
+                int top = Math.Max(box1.Top, box2.Top);
+                int bottom = Math.Min(box1.Bottom, box2.Bottom);
                 int left = Math.Max(box1.Left, box2.Left);
                 int right = Math.Min(box1.Right, box2.Right);
-                player1.updatePosition(left - right);
-                player2.updatePosition(left - right);
+                //Loop through the intersecting rectangle and check each player's intersecting pixel.
+                //If there is a pixel where both players individual pixels are not entierly transparent, then a collision has occured.
+                for (int y = top; y < bottom; y++)
+                {
+                    for (int x = left; x < right; x++)
+                    {
+                        // Retrieve individual pixel color data from each player.
+                        Color p1Color = player1TextureData[(x - player1.boundings.Left) + (y - player1.boundings.Top) * player1.boundings.Width];
+                        Color p2Color = player2TextureData[(x - player2.boundings.Left) + (y - player2.boundings.Top) * player2.boundings.Width];
+                        
+                        // Check if thouse pixels are transparent or not. Iff both pixels are not entierly transparent, a collision has occured.
+                        if (p1Color.A != 0 && p2Color.A != 0)
+                        { 
+                            //Hit occured!
+                                  SpriteID p1Stance = player1.GetCurrentStance();
+                                  SpriteID p2Stance = player2.GetCurrentStance();
+
+                                    if (p1Stance == SpriteID.Wait && p2Stance == SpriteID.Wait)
+                                    {
+                                        player1.updatePosition(left - right);
+                                        player2.updatePosition(left - right);
+                                    }
+                                    if (p1Stance == SpriteID.Attack && p2Stance == SpriteID.Wait)
+                                    {
+                                        GraphicsDevice.Clear(Color.Red);
+                                        player1.updatePosition(left - right);
+                                        player2.updatePosition(left - right);
+                                    }
+                                  /*  if (p1Stance == SpriteID.Wait && p2Stance == SpriteID.Wait)
+                                    {
+                                        player1.updatePosition(left - right);
+                                        player2.updatePosition(left - right);
+                                    }*/
+                                    return;
+                        }
+                    }
+
+                }
+
+      
             }      
         }
+        /*
+        private void DetermineCollision()
+        {
+            SpriteID p1Stance = player1.GetCurrentStance();
+            SpriteID p2Stance = player2.GetCurrentStance();
 
+            if (p1Stance == SpriteID.Wait && p2Stance == SpriteID.Wait)
+            { 
+                player1.updatePosition
+            }
+        }
 
+        */
     }
 }

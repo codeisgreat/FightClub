@@ -11,14 +11,13 @@ using Microsoft.Xna.Framework.GamerServices;
 namespace WindowsGame1
 {
 
-    enum SpriteID { Attack, Defense, Wait }
+   public enum SpriteID { Attack, Defense, Wait }
 
     public class Player
     {
-        //Testar ännu lite skit
-        //GIT COMMENT SKIT FÖR ATT TESTA OSV!
+        
         float speed;
-        int stance;
+        SpriteID stance;
         int count;
         // Position 
         Vector2 position;
@@ -28,6 +27,7 @@ namespace WindowsGame1
         Texture2D texture;
         Rectangle currentTexture;
         public Rectangle boundings;
+        private Dictionary<SpriteID, Color[]> colorArrayMap;
         
         // Input
         KeyboardState keyboard;
@@ -39,9 +39,10 @@ namespace WindowsGame1
             this.key = key;
             this.direction = direction;
             speed = 0.5f;
-            stance = (int) SpriteID.Wait;
+            stance = SpriteID.Wait;
             currentTexture = new Rectangle(0, 0, 70, 114);
             boundings = new Rectangle((int) position.X, (int) position.Y, currentTexture.Width, currentTexture.Height);
+            colorArrayMap = new Dictionary<SpriteID, Color[]>();
             
         }
 
@@ -49,6 +50,17 @@ namespace WindowsGame1
         public void LoadContent(ContentManager cm, String fileName)
         {            
             texture = cm.Load<Texture2D>(fileName);
+            
+            Color[] textureData = new Color[currentTexture.Width * currentTexture.Height];
+            
+            texture.GetData(0, currentTexture, textureData, currentTexture.X* (int)SpriteID.Attack,textureData.Length);
+            colorArrayMap.Add(SpriteID.Attack, textureData);
+            
+            texture.GetData(0, currentTexture, textureData, currentTexture.X * (int)SpriteID.Defense, textureData.Length);
+            colorArrayMap.Add(SpriteID.Defense, textureData);
+            
+            texture.GetData(0, currentTexture, textureData, currentTexture.X * (int)SpriteID.Wait, textureData.Length);
+            colorArrayMap.Add(SpriteID.Wait, textureData);
         }
 
         public void Update(GameWindow window)
@@ -57,11 +69,11 @@ namespace WindowsGame1
 
             switch (stance)
             {
-                case ((int)SpriteID.Attack):
+                case (SpriteID.Attack):
                     AttackStance(); break;
-                case ((int)SpriteID.Defense):
+                case (SpriteID.Defense):
                     DefenseStance(); break;
-                case ((int)SpriteID.Wait):
+                case (SpriteID.Wait):
                     WaitStance(); break;
             }
 
@@ -75,7 +87,7 @@ namespace WindowsGame1
         private void AttackStance()
         {
             position.X += direction * 20;
-            stance = (int)SpriteID.Wait;
+            stance = SpriteID.Wait;
         }
 
         private void DefenseStance()
@@ -83,7 +95,7 @@ namespace WindowsGame1
             if (keyboard.IsKeyDown(key))
                 position.X -= (direction * speed);
             else
-                stance = (int)SpriteID.Wait;
+                stance = SpriteID.Wait;
         }
 
         private void WaitStance()
@@ -93,13 +105,13 @@ namespace WindowsGame1
                 count++;
                 if (count > 5)
                 {
-                    stance = (int)SpriteID.Defense;
+                    stance = SpriteID.Defense;
                     count = 0;
                 }
             }
             else if (count > 1)
             {
-                stance = (int) SpriteID.Attack;
+                stance = SpriteID.Attack;
                 count = 0;
             }
             else
@@ -118,7 +130,7 @@ namespace WindowsGame1
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            currentTexture.X = stance * currentTexture.Width;
+            currentTexture.X = (int)stance * currentTexture.Width;
             spriteBatch.Draw(texture, position, currentTexture, Color.White);     
         }
 
@@ -128,5 +140,17 @@ namespace WindowsGame1
             return boundings;
         }
 
+        public Color[] GetCurrentSpriteData()
+        {
+            Color[] colorArray;
+            colorArrayMap.TryGetValue(stance,out colorArray);
+            return colorArray;
+            
+        }
+        
+        public SpriteID GetCurrentStance()
+        {
+            return stance;
+        }
     }
 }
